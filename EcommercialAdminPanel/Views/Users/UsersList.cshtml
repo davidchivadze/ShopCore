@@ -1,0 +1,61 @@
+﻿
+
+@{
+    ViewData["Title"] = "UsersList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Models.AdminPanel.ViewModels.Accounting.UserListModel
+<script src="~/js/Users/UsersMain.js"></script>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">სამართავი პანელის მომხმარებლები</h4>
+                <h6 class="card-subtitle"></h6>
+                <div class="table-responsive m-t-40">
+                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="90%">
+                        <thead>
+                            <tr>
+                                <th>სახელი</th>
+                                <th>გვარი</th>
+                                <th>დაბადების თარიღი</th>
+                                <th>პირადი ნომერი</th>
+                                <th>უფლებები</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>სახელი</th>
+                                <th>გვარი</th>
+                                <th>დაბადების თარიღი</th>
+                                <th>პირადი ნომერი</th>
+                                <th>უფლებები</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach(var user in Model.UsersList){
+                            <tr>
+                                <td>@user.FirstName</td>
+                                <td>@user.LastName</td>
+                                <td>@user.BirthDate</td>
+                                <td>@user.PIN</td>
+                                <td>
+                                    @foreach(var permission in user.UserRoles){
+
+                                    <label>@permission.RoleName ,</label> 
+                                    }
+                                </td>
+                                <td><button class="btn btn-outline-success" onclick="EditUser(@user.ID)" @*data-toggle="modal" data-target="#responsive-modal"*@><i class="mdi mdi-account-edit"></i></button></td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("~/Views/Users/EditUser.cshtml")
