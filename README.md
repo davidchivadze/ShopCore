@@ -1,0 +1,2 @@
+# ShopCore
+.net Core Commercial
